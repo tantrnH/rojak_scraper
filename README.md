@@ -26,7 +26,7 @@ This repository contains a Python command line tool that collects Malay–Englis
    - Create a service account and download its JSON key.
    - Share the target spreadsheet with the service account email (this is required even when the script creates the sheet for you).
 
-3. **Run the scraper**. The example below writes to a sheet named `Shopee Rojak Dataset` and stops after processing 30 popular products. The command adds the `src/` directory to `PYTHONPATH` so Python can find the package without installing it. Use the variant that matches your shell:
+3. **Run the scraper**. The example below writes to a sheet named `Shopee Rojak Dataset` and stops after processing 30 popular products. The command adds the `src/` directory to `PYTHONPATH` so Python can find the package without installing it. **If you see the error `PYTHONPATH=src : The term 'PYTHONPATH=src' is not recognized`, it means PowerShell parsed the inline assignment as a command—use one of the Windows-specific variants below.**
 
    <details>
    <summary><strong>macOS / Linux (bash, zsh, etc.)</strong></summary>
@@ -73,6 +73,13 @@ This repository contains a Python command line tool that collects Malay–Englis
    ```
 
    The `set` command only applies to the current window. Close and reopen the prompt or run it again to clear the variable.
+
+   </details>
+
+   <details>
+   <summary><strong>Troubleshooting: “PYTHONPATH=src is not recognized”</strong></summary>
+
+   This message comes from Windows shells when you copy the macOS/Linux example verbatim. Instead of placing the environment variable in front of the command, set it using either `$env:PYTHONPATH = "$(Get-Location)\src"` (PowerShell) or `set PYTHONPATH=%CD%\src` (Command Prompt) before running `python -m rojak_scraper.cli`.
 
    </details>
 
